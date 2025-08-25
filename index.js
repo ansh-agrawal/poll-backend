@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
@@ -36,4 +37,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4000, () => console.log("Backend running on http://localhost:4000"));
+// ✅ Render requires dynamic port
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
